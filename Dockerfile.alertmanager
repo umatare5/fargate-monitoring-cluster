@@ -1,0 +1,23 @@
+FROM prom/alertmanager:latest
+
+COPY services/alertmanager/alertmanager.yml /etc/alertmanager/alertmanager.yml
+
+# Create entrypoint.sh that replaces secrets with values.
+ARG SLACK_WEBHOOK_URL
+RUN echo $'#!/bin/sh\n\
+  sed -i -e 's~SLACK_WEBHOOK_URL~'${SLACK_WEBHOOK_URL}'~g' \
+  /etc/alertmanager/alertmanager.yml && \
+  exec /bin/alertmanager "$@"' \
+  > /etc/alertmanager/entrypoint.sh
+RUN chmod +x /etc/alertmanager/entrypoint.sh
+# Finish creation
+
+USER       nobody
+EXPOSE     9093
+VOLUME     [ "/alertmanager" ]
+WORKDIR    /alertmanager
+# DEBUG: ENTRYPOINT ["/bin/alertmanager"]
+ENTRYPOINT ["/etc/alertmanager/entrypoint.sh"]
+CMD        [ \
+  "--config.file=/etc/alertmanager/alertmanager.yml", \
+  "--storage.path=/alertmanager" ]
