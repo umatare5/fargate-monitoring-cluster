@@ -14,7 +14,7 @@ RUN echo $'#!/bin/sh\n\
   exec /bin/prometheus "$@"' \
   > /etc/prometheus/entrypoint.sh
 RUN chmod +x /etc/prometheus/entrypoint.sh
-# Finish creation
+# Finish creation.
 
 USER       nobody
 EXPOSE     9090

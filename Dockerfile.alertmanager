@@ -10,7 +10,7 @@ RUN echo $'#!/bin/sh\n\
   exec /bin/alertmanager "$@"' \
   > /etc/alertmanager/entrypoint.sh
 RUN chmod +x /etc/alertmanager/entrypoint.sh
-# Finish creation
+# Finish creation.
 
 USER       nobody
 EXPOSE     9093
