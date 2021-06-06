@@ -4,11 +4,10 @@ alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      - localhost:9093
+      - alertmanager.monitoring.local:9093
 
 rule_files:
   - rules/alerts/*
-  - rules/records/*
 
 scrape_configs:
   - job_name: 'blackbox_icmp'

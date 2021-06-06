@@ -79,4 +79,3 @@ Refer to [TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md).
 ## Note
 
 - Add reverse proxy.
-- Add rules in prometheus.

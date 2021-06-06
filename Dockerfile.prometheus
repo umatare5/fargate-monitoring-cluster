@@ -1,6 +1,7 @@
 FROM prom/prometheus:latest
 
 COPY services/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
+COPY services/prometheus/rules/         /etc/prometheus/rules/
 
 # Create entrypoint.sh that replaces secrets with values.
 ARG REMOTE_STORAGE_URL
