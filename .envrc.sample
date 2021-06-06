@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export SLACK_WEBHOOK_URL="hooks.slack.com/services/XXX/XXX/XXX"
+export REMOTE_STORAGE_URL="us-east-1-1.aws.cloud1.influxdata.com/orgs/XXX"
+export REMOTE_STORAGE_USERNAME=influxdb
+export REMOTE_STORAGE_PASSWORD=influxdb
