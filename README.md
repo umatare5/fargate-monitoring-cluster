@@ -75,3 +75,8 @@ Refer to [CLOSING_GUIDE.md](./docs/CLOSING_GUIDE.md).
 ## Troubleshooting
 
 Refer to [TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md).
+
+## Note
+
+- Add reverse proxy.
+- Add rules in prometheus.
