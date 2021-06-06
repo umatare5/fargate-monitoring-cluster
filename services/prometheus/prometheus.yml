@@ -1,0 +1,36 @@
+global:
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - localhost:9093
+
+rule_files:
+  - rules/alerts/*
+  - rules/records/*
+
+scrape_configs:
+  - job_name: 'blackbox_icmp'
+    metrics_path: /probe
+    params:
+      module: [icmp]
+    static_configs:
+      - targets:
+        - umatare5.netlify.app
+    relabel_configs: &blackbox_relabel_configs
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter.monitoring.local:9115
+
+  - job_name: 'blackbox_http_2xx'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+        - https://umatare5.netlify.app
+    relabel_configs: *blackbox_relabel_configs

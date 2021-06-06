@@ -1,0 +1,26 @@
+FROM prom/prometheus:latest
+
+COPY services/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
+
+# Create entrypoint.sh that replaces secrets with values.
+ARG REMOTE_STORAGE_URL
+ARG REMOTE_STORAGE_USERNAME
+ARG REMOTE_STORAGE_PASSWORD
+RUN echo $'#!/bin/sh\n\
+  sed -i -e 's~REMOTE_STORAGE_URL~'${REMOTE_STORAGE_URL}'~g'           /etc/prometheus/prometheus.yml && \
+  sed -i -e 's~REMOTE_STORAGE_USERNAME~'${REMOTE_STORAGE_USERNAME}'~g' /etc/prometheus/prometheus.yml && \
+  sed -i -e 's~REMOTE_STORAGE_PASSWORD~'${REMOTE_STORAGE_PASSWORD}'~g' /etc/prometheus/prometheus.yml && \
+  exec /bin/prometheus "$@"' \
+  > /etc/prometheus/entrypoint.sh
+RUN chmod +x /etc/prometheus/entrypoint.sh
+# Finish creation
+
+USER       nobody
+EXPOSE     9090
+# DEBUG: ENTRYPOINT ["/bin/prometheus"]
+ENTRYPOINT ["/etc/prometheus/entrypoint.sh"]
+CMD        [ \
+  "--config.file=/etc/prometheus/prometheus.yml", \
+  "--storage.tsdb.path=/prometheus", \
+  "--web.console.libraries=/usr/share/prometheus/console_libraries", \
+  "--web.console.templates=/usr/share/prometheus/consoles" ]
