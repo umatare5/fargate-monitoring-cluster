@@ -1,0 +1,25 @@
+# The manifest for the "prometheus" service.
+
+# Descriptions
+name: prometheus
+type: Load Balanced Web Service
+
+# Load balancer settings
+http:
+  path: '/'
+  healthcheck:
+    path: '/status'
+  allowed_source_ips:
+    - "36.8.0.0/13"
+    - "35.72.164.160/27"
+
+# Container settings
+image:
+  build: Dockerfile.prometheus
+  port: 9090
+
+# Service in the cluster settings
+cpu: 256     # 256 means 0.25 vCPU.
+memory: 512  # Amount in MiB.
+count: 1     # Number of tasks that should be running in your service.
+exec: true   # Enable running commands in your container.
