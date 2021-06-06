@@ -2,18 +2,20 @@
 
 ## Container debugging
 
-- Quickstart
+### Quickstart
 
-  ```fish
-  export SVC_NAME=hooks.slack.com/services/hoo/bar/baz
-  export SLACK_WEBHOOK_URL=hooks.slack.com/services/hoo/bar/baz
-  docker container stop $SVC_NAME
-  docker container rm $SVC_NAME
-  docker image build -f Dockerfile.$SVC_NAME -t local/$SVC_NAME:dev .
-  docker container create --env SLACK_WEBHOOK_URL=$SLACK_WEBHOOK_URL --name $SVC_NAME local/$SVC_NAME:dev
-  docker container start  $SVC_NAME
-  docker container logs   $SVC_NAME
-  ```
+```fish
+export SVC_NAME=hooks.slack.com/services/hoo/bar/baz
+export SLACK_WEBHOOK_URL=hooks.slack.com/services/hoo/bar/baz
+docker container stop $SVC_NAME
+docker container rm $SVC_NAME
+docker image build -f Dockerfile.$SVC_NAME -t local/$SVC_NAME:dev .
+docker container create --env SLACK_WEBHOOK_URL=$SLACK_WEBHOOK_URL --name $SVC_NAME local/$SVC_NAME:dev
+docker container start  $SVC_NAME
+docker container logs   $SVC_NAME
+```
+
+### Step-by-Step
 
 - Set `SVC_NAME`. (Able to choose `prometheus` or `blackbox-exporter`)
 

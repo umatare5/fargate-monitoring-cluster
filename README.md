@@ -1,26 +1,16 @@
 # fargate-monitoring-cluster
 
-An example structure with individual Dockerfiles using `copilot`.
+An example to manage multi-container applications using [copilot](https://github.com/aws/copilot-cli).
 
 ## Background
 
-Amazon Fargate is not supported `docker-compose.yml`.
+`copilot` is an awesome CLI to manage container applications on AWS!
 
-But I hope to manage multi-container applications in monolithic repository.
+But it's not supported `docker-compose.yml`. I hope to manage multi-containers all in one.
 
 ## To Do
 
 - Watch availability of [my website](https://umatare5.netlify.app) using Prometheus.
-
-## Description
-
-- This repository manages a `monitoring` cluster.
-- The cluster includes Prometheus, Alertmanager and blackbox-exporter.
-- Prometheus is associated with LB with source IP restrictions and faces the internet.
-- LB has dedicated hostname in my domain. The name register to Route53 automatically.
-- LB terminates SSL connection by using my domain's certificate.
-- Alertmanager and blackbox-exporter are backend services.
-- They access to internet when requested from Prometheus.
 
 ## Architecture
 
@@ -31,17 +21,17 @@ But I hope to manage multi-container applications in monolithic repository.
 |                                                           |
 | +-- Region: ap-northeast-1 --------------------------+    |    +~~~~~~ Internet ~~~~~~+
 | |                                                    |    |    |                      |
-| | +-- Fargate -----------------------------------+   |    |    |      +---------+     |
-| | |                                              |   |    |    |  +---+ Browser |     |
-| | | +-- Cluster: monitoring -----------------+   |   |    |    |  |   +---------+     |
+| | +-- Fargate -----------------------------------+   |    |    |       +---------+    |
+| | |                                              |   |    |    |  +----+ Browser |    |
+| | | +-- Cluster: monitoring -----------------+   |   |    |    |  |    +---------+    |
 | | | |                                        |   |   |    |    |  |                   |
-| | | |  service: prometheus        [c]<---------------[ LB ]<------+   +---------+     |
-| | | |  service: alertmanager      [c]-------------------------------->|  Slack  |     |
-| | | |  service: blackbox-expoter  [c]-----------------------------+   +---------+     |
+| | | |  service: prometheus        [c]<---------------[ LB ]<------+    +---------+    |
+| | | |  service: alertmanager      [c]--------------------------------->|  Slack  |    |
+| | | |  service: blackbox-expoter  [c]-----------------------------+    +---------+    |
 | | | |                                        |   |   |    |    |  |                   |
-| | | +----------------------------------------+   |   |    |    |  |   +---------+     |
-| | +----------------------------------------------+   |    |    |  +-->| Netlify |     |
-| |          +----------------+ +-----+ +---------+    |    |    |      +---------+     |
+| | | +----------------------------------------+   |   |    |    |  |    +---------+    |
+| | +----------------------------------------------+   |    |    |  +--->| Netlify |    |
+| |          +----------------+ +-----+ +---------+    |    |    |       +---------+    |
 | |          | System Manager | | VPC | | Route53 |    |    |    |                      |
 | |          +----------------+ +-----+ +---------+    |    |    +~~~~~~~~~~~~~~~~~~~~~~+
 | +----------------------------------------------------+    |
@@ -51,14 +41,24 @@ But I hope to manage multi-container applications in monolithic repository.
 *===========================================================*
 ```
 
-```bash
-$ copilot svc ls
-Name                Type
-----                ----
-alertmanager        Backend Service
-blackbox-exporter   Backend Service
-prometheus          Load Balanced Web Service
-```
+### Description
+
+- This repository deploys `monitoring` cluster.
+- The cluster contains Prometheus, Alertmanager and blackbox-exporter.
+- Prometheus is associated with LB with source IP restrictions and faces the internet.
+- LB has dedicated hostname in my domain. The name register to Route53 automatically.
+- LB terminates SSL connection by using my domain's certificate.
+- Alertmanager and blackbox-exporter are backend services.
+- They access to internet when requested from Prometheus.
+
+### Directory Structure
+
+| Name          | Description                                                                    |
+| :------------ | ------------------------------------------------------------------------------ |
+| Dockerfile.\* | Dockerfiles for services that be deploying.                                    |
+| /services     | Container application directory. It contains settings for containers.          |
+| /copilot      | `copilot` managed directory. It contains settings for Fargate, ELB and others. |
+| /docs         | Documents directory. It contains guides that supplements the `README.md`.      |
 
 ## Setup
 
