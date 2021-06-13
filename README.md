@@ -43,7 +43,7 @@ But it's not supported `docker-compose.yml`. I hope to manage multi-containers a
 
 ### Description
 
-- This repository deploys `monitoring` cluster.
+- This repository is used for build `monitoring` cluster on Fargate.
 - The cluster contains Prometheus, Alertmanager and blackbox-exporter.
 - Prometheus is associated with LB with source IP restrictions and faces the internet.
 - LB has dedicated hostname in my domain. The name register to Route53 automatically.
@@ -58,7 +58,7 @@ But it's not supported `docker-compose.yml`. I hope to manage multi-containers a
 | Dockerfile.\* | Dockerfiles for services that be deploying.                                    |
 | /services     | Container application directory. It contains settings for containers.          |
 | /copilot      | `copilot` managed directory. It contains settings for Fargate, ELB and others. |
-| /docs         | Documents directory. It contains guides that supplements the `README.md`.      |
+| /docs         | Document directory. It contains guides that supplements the `README.md`.       |
 
 ## Setup
 
