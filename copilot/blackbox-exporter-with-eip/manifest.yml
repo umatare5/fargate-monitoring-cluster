@@ -12,7 +12,7 @@ image:
 # Service in the cluster settings
 cpu: 256     # 256 means 0.25 vCPU.
 memory: 512  # Amount in MiB.
-count: 1     # Number of tasks that should be running in your service.
+count: 2     # Number of tasks that should be running in your service.
 exec: true   # Enable running commands in your container.
 
 # NAT Gateway settings
