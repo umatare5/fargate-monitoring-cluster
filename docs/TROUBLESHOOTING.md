@@ -62,3 +62,12 @@ docker container logs   $SVC_NAME
   docker container stop $SVC_NAME
   docker container rm $SVC_NAME
   ```
+
+## Check own IP
+
+- Use `wget`. containers not contains `curl`.
+
+```bash
+/alertmanager # wget -qO - http://ifconfig.me/ip
+54.199.47.6
+```
