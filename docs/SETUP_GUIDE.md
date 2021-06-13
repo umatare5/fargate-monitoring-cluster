@@ -9,6 +9,7 @@ copilot svc init --name blackbox-exporter            # CloudFormation: None
 copilot svc init --name alertmanager                 # CloudFormation: None
 copilot svc init --name prometheus                   # CloudFormation: None
 copilot svc deploy --name blackbox-exporter --env z1 # CloudFormation: monitoring-z1-blackbox-exporter
+copilot svc deploy --name blackbox-exporter-with-eip --env z1 # CloudFormation: monitoring-z1-blackbox-exporter-with-eip
 copilot svc deploy --name alertmanager --env z1      # CloudFormation: monitoring-z1-alertmanager
 copilot svc deploy --name prometheus --env z1        # CloudFormation: monitoring-z1-alertmanager
 ```

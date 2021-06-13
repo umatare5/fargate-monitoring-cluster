@@ -30,6 +30,12 @@ copilot env delete --name z1
   copilot svc delete --name blackbox-exporter --env z1
   ```
 
+- Delete blackbox-exporter-with-eip.
+
+  ```bash
+  copilot svc delete --name blackbox-exporter-with-eip --env z1
+  ```
+
 - Delete application.
 
   ```bash
