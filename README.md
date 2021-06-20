@@ -80,4 +80,5 @@ Refer to [TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md).
 
 ## Note
 
-- Add reverse proxy.
+- OAuth2 in Prometheus
+- Support for GCP Cloud Run
