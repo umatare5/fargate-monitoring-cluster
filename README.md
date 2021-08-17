@@ -1,4 +1,4 @@
-# fargate-monitoring-cluster
+# fargate-prometheus-boilerplate
 
 An example to manage multi-container applications using [copilot](https://github.com/aws/copilot-cli).
 
@@ -77,8 +77,3 @@ Refer to [CLOSING_GUIDE.md](./docs/CLOSING_GUIDE.md).
 ## Troubleshooting
 
 Refer to [TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md).
-
-## Note
-
-- OAuth2 in Prometheus
-- Support for GCP Cloud Run
